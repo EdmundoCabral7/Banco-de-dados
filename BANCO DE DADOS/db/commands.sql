@@ -6,9 +6,16 @@ DROP TABLE cursos;
 
 
 CREATE TABLE cursos (
-    id INTERGET NOT NULL,
+    id INTERGE NOT NULL,
     nome TEXT NOT NULL,
     aulas INTEGER
 );
 
-DROP TABLE curso;
+PRAGMA TABLE_INFO("cursos");
+
+SELECT * FROM cursos;
+
+INSERT INTO cursos(id, nome, aulas) VALUES (1, 'HTML', 10);
+
+INSERT INTO cursos(id, nome, aulas) VALUES (2, 'CSS', 12);
+
