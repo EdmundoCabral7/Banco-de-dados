@@ -6,7 +6,7 @@ DROP TABLE cursos;
 
 
 CREATE TABLE cursos (
-    id INTERGE NOT NULL,
+    id INTEGER NOT NULL,
     nome TEXT NOT NULL,
     aulas INTEGER
 );
