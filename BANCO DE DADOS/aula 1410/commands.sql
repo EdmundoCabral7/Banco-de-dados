@@ -62,3 +62,83 @@ SELECT * FROM "produtos" WHERE "categoria" NOT IN ('notebook' , 'hardware');
 SELECT * FROM "produtos" WHERE "id" IN (1, 5, 7); 
 
 SELECT * FROM "produtos" WHERE "id" NOT IN (1, 5, 7);
+
+-- Funções (mean, sum, gau, gauseigen)
+
+-- As Funções matemáticas mais comuns no SQLITE são:
+
+-- COUNT()
+-- Conta o número de linhas
+-- SUM()
+-- Soma os valores de uma coluna numérica
+-- AVG()
+-- Calcula a média dos valores de uma coluna numérica
+-- MIN()
+-- Retorna o menor valor de uma coluna
+
+-- As funções de texto mais comuns no SQLITE são:
+-- LENGHT()
+-- UPPER()
+-- LOWER()
+-- SUBSTR
+--Retorna uma parte de uma string
+
+-- Data e hora
+-- DATE()
+-- Retorna a data atual ou converte uma string em data.
+-- TIME()
+-- DATETIME()
+-- STRFTIME()
+-- Formata uma data e hora em uma string.
+
+-- USO DAS FUNÇÕES
+-- as funções podem ser usadas em CREATE, SELECT, WHERE, INSERT e mais.
+
+-- defalt(ultima auka)
+
+CREATE TABLE "livros" (
+"id" INTEGER PRIMARY KEY,
+"nome" TEXT NOT NULL,
+"criado" TEXT NOT NULL DEFAULT (STRFTIME('%Y-%m-%d', 'now'))
+) STRICT;
+
+INSERT INTO
+"livros" ("nome")
+Values
+(TRIM(' Aprendendo SQL '));
+
+-- GROUP E ORDER
+
+-- ORDER BY
+
+-- Ordena os resultados de uma consulta
+-- ASC (ascendente) é o padrão
+
+SELECT * FROM "produtos" ORDER BY "preco" ASC;
+SELECT * FROM "produtos" ORDER BY "preco" DESC;
+
+--primeiro a categoria, depois preço
+SELECT * FROM "produtos" ORDER BY "categoria" ASC, "preco" ASC;
+
+-- ORDER BY ordena por data
+-- GROUP BY
+-- agrupa os resultados de uma consulta.
+
+SELECT "categoria", COUNT(*) AS "total" FROM "produtos" GROUP BY "categoria";
+SELECT "categoria", AVR("preco") AS "preco_medio" FROM "produtos" GROUP BY "categoria";
+
+-- GROUP BY e ORDER BY juntos
+SELECT "categoria", COUNT(*) AS "total"
+FROM "produtos" GROUP BY "categoria" ORDER BY "total" DESC;
+
+--Data por ANO
+SELECT STRFTIME('%Y', "criado") AS "ano", COUNT(*) AS "total"
+FROM "produtos" GROUP BY "ano";
+
+SELECT "categoria", COUNT(*) AS "total"
+FROM "produtos" GROUP BY "categoria"
+HAVING "total" > 1;
+
+SELECT "categoria", AVG ("preco") AS "preco_medio"
+FROM "produtos" GROUP BY "categoria"
+HAVING "preco_medio" > 70000;
